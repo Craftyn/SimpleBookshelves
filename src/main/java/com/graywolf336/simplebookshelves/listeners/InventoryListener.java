@@ -48,6 +48,9 @@ public class InventoryListener implements Listener {
 		Location l = (Location) MetaHelper.getMetaValue(p, "SIMPLE_BOOKSHELVES_OPENED_BOOKSHELF", Location.class);
 		Bookshelf b = this.pl.getBookshelfManager().getBookshelf(l);
 		
+		// As a general rule of thumb, anyone can interact with storage bookshelves
+		// and we will let listeners to "PreBookshelfInventoryClickEvent" cancel
+		// the event if a player isn't allowed to
 		PreBookshelfInventoryClickEvent ev = new PreBookshelfInventoryClickEvent(event, p, b);
 		this.pl.getServer().getPluginManager().callEvent(ev);
 
@@ -55,14 +58,7 @@ public class InventoryListener implements Listener {
 			event.setCancelled(true);
 			return;
 		}
-		
-		// As a general rule of thumb, anyone can interact with storage bookshelves
-		// and we will let listeners to "PreBookshelfInventoryClickEvent" cancel
-		// the event if a player isn't allowed to
-		if (b.getType() == BookshelfType.STORAGE) {
-			return;
-		}
-		
+
 		ItemStack i = event.getCurrentItem();
 		if (i == null || i.getType() == Material.AIR) {
 			return;
@@ -74,6 +70,12 @@ public class InventoryListener implements Listener {
 				event.setCancelled(true);
 			}
 			
+			return;
+		}
+		
+		// Non-owners can't interact with storage bookshelvse
+		if (b.getType() == BookshelfType.STORAGE) {
+			event.setCancelled(true);
 			return;
 		}
 

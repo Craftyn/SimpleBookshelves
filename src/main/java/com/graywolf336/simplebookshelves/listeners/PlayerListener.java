@@ -103,13 +103,13 @@ public class PlayerListener implements Listener {
 			boolean result = bs.setType(toType);
 			if (result) {
 				p.sendMessage(ChatColor.GREEN + "Successfully changed the Bookshelf type to " + toType.toString() + "!");
+				i.setAmount(0);
+				i.setType(Material.AIR);
 			} else {
 				p.sendMessage(ChatColor.RED + "Failed to change the type, ensure the items in the bookshelf are valid.");
+				return;
 			}
-			
-			i.setAmount(0);
-			i.setType(Material.AIR);
-			
+
 			event.setCancelled(true);
 			return;
 		}
