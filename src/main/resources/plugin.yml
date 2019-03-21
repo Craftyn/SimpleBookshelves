@@ -1,0 +1,19 @@
+name: SimpleBookshelves
+main: com.graywolf336.simplebookshelves.BookshelvesMain
+version: maven-version-number
+description: "Enables in game bookshelves to retain inventory."
+authors: [graywolf336]
+depend: [Vault]
+softdepends: [Towny]
+load: POSTWORLD
+api-version: 1.13
+permissions:
+  simplebookshelves.open:
+    description: Allows a player to open bookshelves
+    default: op
+  simplebookshelves.create:
+    description: Allows a player to create bookshelves
+    default: op
+  simplebookshelves.modifyothers:
+    description: Allows a player to modify bookshelves owned by other players
+    default: op
