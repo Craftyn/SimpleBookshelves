@@ -5,6 +5,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.graywolf336.simplebookshelves.data.Bookshelf;
+import com.graywolf336.simplebookshelves.data.SimpleLocation;
 import com.graywolf336.simplebookshelves.listeners.BlockListener;
 import com.graywolf336.simplebookshelves.listeners.InventoryListener;
 import com.graywolf336.simplebookshelves.listeners.PlayerListener;
@@ -76,6 +77,7 @@ public class BookshelvesMain extends JavaPlugin {
 	}
 	
 	private void loadSerializableClasses() {
+		ConfigurationSerialization.registerClass(SimpleLocation.class, "SimpleBookselfLocation");
 		ConfigurationSerialization.registerClass(Bookshelf.class, "SimpleBookself");
 	}
 	

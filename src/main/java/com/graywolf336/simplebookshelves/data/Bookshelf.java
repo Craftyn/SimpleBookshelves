@@ -26,7 +26,7 @@ public class Bookshelf implements ConfigurationSerializable {
 	private String title;
 	private int rows;
 	private BookshelfType type;
-	private Location loc;
+	private SimpleLocation loc;
 	
 	private Inventory inv;
 	
@@ -40,7 +40,7 @@ public class Bookshelf implements ConfigurationSerializable {
 		this.ownerName = player.getName();
 		this.title = title;
 		this.rows = rows;
-		this.loc = location;
+		this.loc = new SimpleLocation(location);
 		this.type = BookshelfType.STORAGE;
 	}
 	
@@ -87,7 +87,7 @@ public class Bookshelf implements ConfigurationSerializable {
 		return true;
 	}
 	
-	public Location getLocation() {
+	public SimpleLocation getLocation() {
 		return this.loc;
 	}
 	
@@ -156,7 +156,7 @@ public class Bookshelf implements ConfigurationSerializable {
 		b.title = (String) map.get("info.title");
 		b.rows = (int) map.get("info.rows");
 		b.type = BookshelfType.valueOf((String) map.get("info.type"));
-		b.loc = (Location) map.get("info.location");
+		b.loc = (SimpleLocation) map.get("info.location");
 		
 		b.loadInventory();
 
