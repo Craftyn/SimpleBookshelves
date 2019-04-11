@@ -57,9 +57,12 @@ public class BookshelvesMain extends JavaPlugin {
 	
 	public void onDisable() {
 		try {
+		    if (this.bsMgr == null) {
+		        return;
+		    }
+
 			this.bsMgr.saveBookshelves();
 		} catch(Exception e) {
-			e.printStackTrace();
 			this.getLogger().warning("FAILED TO SAVE THE BOOKSHELVES.");
 		}
 		

@@ -82,6 +82,10 @@ public class InventoryListener implements Listener {
 		// If they clicked in our inventory, set it as cancelled and we'll overwrite it
 		if (StringUtil.startsWithIgnoreCase(event.getClickedInventory().getTitle(), pl.getSettings().getTitle(true))) {
 			event.setCancelled(true);
+		} else {
+		    // If they didn't click in our inventory, don't do anything with it
+		    event.setCancelled(true);
+		    return;
 		}
 
 		if (b.getType() == BookshelfType.ARCHIVE_PAID) {
@@ -101,7 +105,10 @@ public class InventoryListener implements Listener {
 			}
 		}
 
-		p.getInventory().addItem(i);
+		// Only add the item if they don't already have it
+		if (!p.getInventory().contains(i)) {
+		    p.getInventory().addItem(i);
+		}
 	}
 	
 	@EventHandler(ignoreCancelled=true, priority=EventPriority.MONITOR)
